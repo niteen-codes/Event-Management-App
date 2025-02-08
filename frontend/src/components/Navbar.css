@@ -124,3 +124,26 @@
 body{
   padding: 0px;
 }
+
+
+/* Login and Register Button Styles */
+.navbar-links a[href="/login"],
+.navbar-links a[href="/register"] {
+  background: #2ecc71; /* Green for login/register */
+  padding: 10px 15px; /* Same as the logout button */
+  border-radius: 6px;
+  font-size: 16px; /* Same as the logout button */
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block; /* Ensures button-like appearance */
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-links a[href="/login"]:hover,
+.navbar-links a[href="/register"]:hover {
+  background: #27ae60;
+  transform: scale(1.05);
+}
+

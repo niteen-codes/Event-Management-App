@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -10,22 +10,21 @@ const Login = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    validateForm(); // Call validation whenever inputs change
-  }, [username, password]);
-
-  // 🔍 Validate Form Fields
-  const validateForm = () => {
+  const validateForm = useCallback(() => {
     let errors = {};
     if (!username.trim()) errors.username = "Username is required!";
     if (!password) errors.password = "Password is required!";
     else if (password.length < 6) errors.password = "Password must be at least 6 characters!";
     setErrors(errors);
-  };
+  }, [username, password]);
+
+  useEffect(() => {
+    validateForm();
+  }, [validateForm]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    validateForm(); // Run validation before submitting
+    validateForm();
 
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
