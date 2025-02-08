@@ -1,0 +1,186 @@
+/* General Styling */
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  padding: 20px;
+}
+
+.dashboard-content {
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px); /* Glass effect */
+  transition: all 0.3s ease-in-out;
+}
+
+Subtle hover effect
+.dashboard-content:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  backdrop-filter: blur(15px);
+}
+
+
+
+.dashboard-title {
+  text-align: center;
+  font-size: 28px;
+  color: #dde0e5;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Filter Section */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-input,
+.search-button {
+  padding: 10px;
+  border: 2px solid #2a5298;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.filter-input {
+  width: 200px;
+}
+
+.search-button {
+  background: #2a5298;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.search-button:hover {
+  background: #1e3c72;
+}
+
+/* Event Form */
+.form-input,
+.form-textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #2a5298;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.submit-button {
+  width: 100%;
+  background: #4caf50;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.submit-button:hover {
+  background: #388e3c;
+}
+
+.cancel-button {
+  width: 100%;
+  background: #d32f2f;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.cancel-button:hover {
+  background: #b71c1c;
+}
+
+/* Event List */
+.event-list {
+  margin-top: 20px;
+}
+
+.event-card {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  transition: 0.3s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.02);
+}
+
+/* Buttons inside event list */
+.attend-button {
+  background: #ff9800;
+  color: white;
+}
+
+.attend-button:hover {
+  background: #e68900;
+}
+
+.leave-button {
+  background: #607d8b;
+  color: white;
+}
+
+.leave-button:hover {
+  background: #546e7a;
+}
+
+.update-button {
+  background: #1976d2;
+  color: white;
+}
+
+.update-button:hover {
+  background: #1565c0;
+}
+
+.cancel-event-button {
+  background: #d32f2f;
+  color: white;
+}
+
+.cancel-event-button:hover {
+  background: #b71c1c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .filter-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filter-input {
+    width: 100%;
+  }
+  .search-button {
+    width: 100%;
+  }
+  .dashboard-content {
+    padding: 20px;
+  }
+}

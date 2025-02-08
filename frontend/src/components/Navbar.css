@@ -1,0 +1,126 @@
+/* General Navbar Styles */
+.navbar {
+  background: linear-gradient(135deg, #3a1c71, #d76d77, #ffaf7b); /* Event-themed gradient */
+  padding: 15px 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Navbar Container */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Navbar Logo */
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-logo:hover {
+  color: #ffdd57; /* Highlight effect */
+}
+
+/* Navbar Links */
+.navbar-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.navbar-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-link:hover {
+  color: #ffdd57;
+  transform: scale(1.1);
+}
+
+/* Buttons */
+.navbar-button {
+  background: #ff4d4d; /* Logout button in red */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-button:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}
+
+/* Login and Register Button Colors */
+.navbar-links a[href="/login"],
+.navbar-links a[href="/register"] {
+  background: #2ecc71; /* Green for login/register */
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar-links a[href="/login"]:hover,
+.navbar-links a[href="/register"]:hover {
+  background: #27ae60;
+}
+
+/* Mobile Menu Icon */
+.menu-icon {
+  font-size: 24px;
+  color: #ffffff;
+  display: none;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-link,
+  .navbar-button {
+    font-size: 16px;
+    padding: 10px;
+  }
+}
+
+body{
+  padding: 0px;
+}

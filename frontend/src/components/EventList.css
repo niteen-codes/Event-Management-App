@@ -1,0 +1,182 @@
+/* Event List Container */
+.event-list {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #56ccf2, #2f80ed);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  color: white;
+  text-align: center;
+  overflow-x: auto; /* Enable horizontal scroll for small screens */
+}
+
+/* Event List Title */
+.event-list h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Event Table */
+.event-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Table Headers */
+.event-table thead {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.event-table th {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Table Rows */
+.event-table tbody tr {
+  transition: background 0.3s ease-in-out;
+}
+
+.event-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Table Cells */
+.event-table td {
+  padding: 12px;
+  font-size: 0.95rem;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Status Messages */
+.cancelled-message {
+  color: #ff2e63;
+  font-weight: bold;
+}
+
+.completed-message {
+  color: #096b32;
+  font-weight: bold;
+}
+
+/* Buttons */
+button {
+  background: #ff2e63;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #e63946;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .event-list {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .event-table th,
+  .event-table td {
+    font-size: 0.85rem;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  .event-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .event-table th,
+  .event-table td {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
+}
+  
+.event-table button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 4px;
+}
+
+.event-table button:hover {
+  transform: scale(1.05);
+}
+
+.event-table button:active {
+  transform: scale(0.95);
+}
+
+/* Attend Button */
+.event-table button:nth-child(1) {
+  background-color: #4caf50;
+  color: white;
+}
+
+.event-table button:nth-child(1):hover {
+  background-color: #45a049;
+}
+
+/* Leave Button */
+.event-table button:nth-child(2) {
+  background-color: #f44336;
+  color: white;
+}
+
+.event-table button:nth-child(2):hover {
+  background-color: #d32f2f;
+}
+
+/* Cancel Button */
+.event-table button:nth-child(3) {
+  background-color: #ff9800;
+  color: white;
+}
+
+.event-table button:nth-child(3):hover {
+  background-color: #e68900;
+}
+
+/* Edit Button */
+.event-table button:nth-child(4) {
+  background-color: #2196f3;
+  color: white;
+}
+
+.event-table button:nth-child(4):hover {
+  background-color: #1e88e5;
+}
