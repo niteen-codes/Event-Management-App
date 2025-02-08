@@ -30,7 +30,7 @@ const Register = () => {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        await axios.post("http://localhost:5000/api/auth/register", { username, password });
+        await axios.post("https://event-management-app-trmh.onrender.com/api/auth/register", { username, password });
         alert("User registered successfully!");
         navigate("/login");
       } catch (err) {

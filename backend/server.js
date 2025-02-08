@@ -29,7 +29,7 @@ const server = http.createServer(app);
 // Initialize Socket.IO with CORS enabled
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000/", // Allow only the frontend origin
+    origin: "https://event-management-app-orpin.vercel.app/", // Allow only the frontend origin
     methods: ["GET", "POST"],
   },
 });

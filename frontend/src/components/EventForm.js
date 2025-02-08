@@ -65,7 +65,7 @@ const EventForm = ({ isGuest, onEventCreated }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:5000/api/events",
+        "https://event-management-app-trmh.onrender.com/api/events",
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );

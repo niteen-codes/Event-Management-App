@@ -14,7 +14,7 @@
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/events", {
+        const response = await axios.get("https://event-management-app-trmh.onrender.com/api/events", {
           params: filter,
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -40,7 +40,7 @@
     }, []);
 
     // Connect to the Socket.IO server
-    const socket = io("http://localhost:5000", {
+    const socket = io("https://event-management-app-trmh.onrender.com", {
       transports: ["websocket"], // Force WebSocket transport
     });
 
@@ -89,7 +89,7 @@
 
     const handleAttendEvent = async (eventId) => {
       try {
-        await axios.post(`http://localhost:5000/api/events/${eventId}/attend`, null, {
+        await axios.post(`https://event-management-app-trmh.onrender.com/api/events/${eventId}/attend`, null, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -104,7 +104,7 @@
 
     const handleLeaveEvent = async (eventId) => {
       try {
-        await axios.post(`http://localhost:5000/api/events/${eventId}/leave`, null, {
+        await axios.post(`https://event-management-app-trmh.onrender.com/api/events/${eventId}/leave`, null, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -124,7 +124,7 @@
 
     const handleCancelEvent = async (eventId) => {
       try {
-        await axios.post(`http://localhost:5000/api/events/${eventId}/cancel`, null, {
+        await axios.post(`https://event-management-app-trmh.onrender.com/api/events/${eventId}/cancel`, null, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -139,7 +139,7 @@
 
     const handleSaveEvent = async (updatedEvent) => {
       try {
-        await axios.put(`http://localhost:5000/api/events/${updatedEvent._id}`, updatedEvent, {
+        await axios.put(`https://event-management-app-trmh.onrender.com/api/events/${updatedEvent._id}`, updatedEvent, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
