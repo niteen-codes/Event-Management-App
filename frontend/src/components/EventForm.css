@@ -1,90 +1,74 @@
-/* General Form Styles */
+/* EventForm.css */
 .event-form {
-  max-width: 500px;
-  margin: auto;
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  padding: 20px;
+  max-width: 600px;
+  margin: 80px auto 20px; /* Adjusted for navbar */
+  padding: 30px;
+  background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.6s ease-in-out;
-  margin-top: 5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: calc(100vh - 100px); /* Scrollable if content exceeds viewport */
 }
 
 .event-form-title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 600;
   color: #333;
   margin-bottom: 20px;
-  animation: slideDown 0.5s ease-in-out;
+  text-align: center;
 }
 
-/* Form Group */
 .form-group {
-  margin-bottom: 15px;
-  position: relative;
-  animation: fadeInUp 0.6s ease-in-out;
+  margin-bottom: 20px;
 }
 
-/* Input Fields */
-.form-input, .form-textarea, select {
+.form-input,
+.form-textarea,
+.form-select {
   width: 100%;
   padding: 12px;
-  border: none;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  background: #fff;
-  font-size: 16px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
+  font-size: 14px;
+  color: #333;
+  background: #f9f9f9;
+  transition: border-color 0.3s ease;
 }
 
-.form-input:focus, .form-textarea:focus, select:focus {
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: #007bff;
   outline: none;
-  border: 2px solid #007bff;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+  background: #fff;
 }
 
-/* Error Styles */
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
 .input-error {
-  border: 2px solid red;
+  border-color: #ff4d4d;
 }
 
 .error-message {
-  color: red;
+  color: #ff4d4d;
   font-size: 12px;
   margin-top: 5px;
-  animation: fadeIn 0.5s;
 }
 
-/* File Input */
-input[type="file"] {
-  background: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  width: 100%;
-}
-
-/* Button Styles */
 .submit-button {
   width: 100%;
   padding: 12px;
   background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white;
+  color: #fff;
   border: none;
-  font-size: 18px;
-  font-weight: bold;
   border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.submit-button:hover {
-  background: linear-gradient(135deg, #0056b3, #004494);
-  box-shadow: 0 4px 10px rgba(0, 91, 187, 0.4);
-  transform: translateY(-2px);
+  transition: background 0.3s ease;
 }
 
 .submit-button:disabled {
@@ -92,59 +76,25 @@ input[type="file"] {
   cursor: not-allowed;
 }
 
+.submit-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056b3, #007bff);
+}
+
+.guest-message {
+  text-align: center;
+  color: #ff4d4d;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .event-form {
-    max-width: 90%;
-    padding: 15px;
+    margin-top: 60px;
+    padding: 20px;
   }
 
-  .form-input, .form-textarea, select {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .submit-button {
-    font-size: 16px;
-    padding: 10px;
-  }
-}
-
-@media (max-width: 480px) {
   .event-form-title {
-    font-size: 20px;
-  }
-
-  .submit-button {
-    font-size: 14px;
-    padding: 8px;
-  }
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    font-size: 24px;
   }
 }
