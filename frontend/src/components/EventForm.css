@@ -7,37 +7,13 @@
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .event-form-title {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: bold;
   color: #fff;
   margin-bottom: 20px;
-  animation: slideIn 1s ease-in-out;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .form-group {
@@ -50,7 +26,7 @@
   border-radius: 8px;
   border: none;
   font-size: 16px;
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s;
   background: #fff;
   color: #333;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -59,7 +35,6 @@
 .form-input:focus, .form-textarea:focus, select:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(255, 105, 135, 0.8);
-  transform: scale(1.05);
 }
 
 .form-textarea {
@@ -87,14 +62,13 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: 0.3s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .submit-button:hover {
   background: linear-gradient(135deg, #ff6384, #ff869a);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-  transform: scale(1.05);
 }
 
 .submit-button:disabled {
