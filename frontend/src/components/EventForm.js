@@ -8,13 +8,13 @@ const EventForm = ({ isGuest, onEventCreated }) => {
     description: "",
     date: "",
     category: "",
+    image: null,
   });
-
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
     let errors = {};
-
     if (!formData.name.trim()) {
       errors.name = "Event name is required.";
     } else if (formData.name.length < 3) {
@@ -47,40 +47,66 @@ const EventForm = ({ isGuest, onEventCreated }) => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" }); // Clear error when user types
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const handleFileChange = (e) => {
+    setFormData({ ...formData, image: e.target.files[0] });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!validateForm()) {
       return;
     }
 
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("You need to log in to create an event.");
+        setLoading(false);
         return;
       }
 
+      let imageUrl = null;
+      if (formData.image) {
+        const formDataToUpload = new FormData();
+        formDataToUpload.append("file", formData.image);
+        formDataToUpload.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+
+        const cloudinaryResponse = await axios.post(
+          `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          formDataToUpload
+        );
+        imageUrl = cloudinaryResponse.data.secure_url;
+      }
+
       const response = await axios.post(
-        "https://event-management-app-trmh.onrender.com/api/events",
-        formData,
-        { headers: { Authorization: `Bearer ${token}` } }
+        "http://localhost:5000/api/events",
+        {
+          ...formData,
+          imageUrl,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      setFormData({ name: "", description: "", date: "", category: "" });
+      setFormData({ name: "", description: "", date: "", category: "", image: null });
       setErrors({});
       alert("Event created successfully!");
-      window.location.reload();
-
       if (onEventCreated) {
         onEventCreated(response.data);
       }
     } catch (err) {
       console.error("Failed to create event:", err.response?.data?.error || "Unknown error");
       alert(`Failed to create event: ${err.response?.data?.error || "Unknown error"}`);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -91,7 +117,6 @@ const EventForm = ({ isGuest, onEventCreated }) => {
   return (
     <form onSubmit={handleSubmit} className="event-form">
       <h2 className="event-form-title">Create Event</h2>
-
       <div className="form-group">
         <input
           type="text"
@@ -103,7 +128,6 @@ const EventForm = ({ isGuest, onEventCreated }) => {
         />
         {errors.name && <p className="error-message">{errors.name}</p>}
       </div>
-
       <div className="form-group">
         <textarea
           name="description"
@@ -114,7 +138,6 @@ const EventForm = ({ isGuest, onEventCreated }) => {
         />
         {errors.description && <p className="error-message">{errors.description}</p>}
       </div>
-
       <div className="form-group">
         <input
           type="datetime-local"
@@ -126,7 +149,6 @@ const EventForm = ({ isGuest, onEventCreated }) => {
         />
         {errors.date && <p className="error-message">{errors.date}</p>}
       </div>
-
       <div className="form-group">
         <select
           name="category"
@@ -148,9 +170,11 @@ const EventForm = ({ isGuest, onEventCreated }) => {
         </select>
         {errors.category && <p className="error-message">{errors.category}</p>}
       </div>
-
-      <button type="submit" className="submit-button">
-        Create Event
+      <div className="form-group">
+        <input type="file" name="image" onChange={handleFileChange} accept="image/*" />
+      </div>
+      <button type="submit" className="submit-button" disabled={loading}>
+        {loading ? "Creating..." : "Create Event"}
       </button>
     </form>
   );

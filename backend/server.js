@@ -3,14 +3,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
-const { Server } = require("socket.io");
 const authRoutes = require("./routes/authRoutes");
 const eventRoutes = require("./routes/eventRoutes");
+const socketIo = require("socket.io"); // Import Socket.IO
 
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Allow requests from this origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
+    credentials: true, // Allow cookies and authentication headers
+  })
+);
 app.use(express.json());
 
 // Routes
@@ -26,26 +32,17 @@ mongoose
 // Create HTTP server
 const server = http.createServer(app);
 
-// Initialize Socket.IO with CORS enabled
-const io = new Server(server, {
+// Initialize Socket.IO
+const io = socketIo(server, {
   cors: {
-    origin: "https://event-management-app-orpin.vercel.app/", // Allow only the frontend origin
-    methods: ["GET", "POST"],
+    origin: "http://localhost:3000", // Allow requests from this origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
+    credentials: true, // Allow cookies and authentication headers
   },
 });
 
-// Attach Socket.IO instance to the Express app
+// Attach Socket.IO to the app
 app.set("io", io);
-
-// Socket.IO event handling
-io.on("connection", (socket) => {
-  console.log("A user connected:", socket.id);
-
-  // Handle disconnection
-  socket.on("disconnect", () => {
-    console.log("User disconnected:", socket.id);
-  });
-});
 
 // Start the server
 const PORT = process.env.PORT || 5000;

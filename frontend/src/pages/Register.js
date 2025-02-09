@@ -12,9 +12,19 @@ const Register = () => {
 
   const validateForm = useCallback(() => {
     let errors = {};
-    if (!username.trim()) errors.username = "Username is required!";
-    if (!password) errors.password = "Password is required!";
-    else if (password.length < 6) errors.password = "Password must be at least 6 characters!";
+    // Validate Username
+    if (!username.trim()) {
+      errors.username = "Please enter a username.";
+    } else if (username.length < 3) {
+      errors.username = "Username must be at least 3 characters long.";
+    }
+    // Validate Password
+    if (!password) {
+      errors.password = "Please enter a password.";
+    } else if (password.length < 6) {
+      errors.password = "Password must be at least 6 characters long.";
+    }
+    // Set the errors object to be shown in the UI
     setErrors(errors);
   }, [username, password]);
 
@@ -25,12 +35,11 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     validateForm();
-
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        await axios.post("https://event-management-app-trmh.onrender.com/api/auth/register", { username, password });
-        alert("User registered successfully!");
+        await axios.post("http://localhost:5000/api/auth/register", { username, password });
+        alert("Registration successful! Please log in.");
         navigate("/login");
       } catch (err) {
         console.error("Registration failed:", err.response?.data?.error || "An error occurred");
@@ -44,27 +53,29 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="register-box">
-        <h1 className="register-title">Register</h1>
+        <h1 className="register-title">Create an Account</h1>
         {errors.general && <p className="error-message">{errors.general}</p>}
         <form onSubmit={handleRegister} className="register-form">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={`register-input ${errors.username ? "input-error" : ""}`}
-          />
-          {errors.username && <p className="error-message">{errors.username}</p>}
-
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={`register-input ${errors.password ? "input-error" : ""}`}
-          />
-          {errors.password && <p className="error-message">{errors.password}</p>}
-
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className={`register-input ${errors.username ? "input-error" : ""}`}
+            />
+            {errors.username && <p className="error-message">{errors.username}</p>}
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={`register-input ${errors.password ? "input-error" : ""}`}
+            />
+            {errors.password && <p className="error-message">{errors.password}</p>}
+          </div>
           <button type="submit" className="register-button" disabled={isSubmitting}>
             {isSubmitting ? "Registering..." : "Register"}
           </button>

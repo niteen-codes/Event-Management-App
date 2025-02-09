@@ -5,9 +5,10 @@ const eventSchema = new mongoose.Schema({
   description: { type: String, required: true },
   date: { type: Date, required: true },
   category: { type: String, required: true },
-  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Reference to the user who created the event
-  attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Array of users attending the event
-  status: { type: String, default: "active" }, // Event status: "active" or "cancelled"
+  createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  status: { type: String, default: "active" }, // Add this field
+  imageUrl: { type: String },
 });
 
 module.exports = mongoose.model("Event", eventSchema);

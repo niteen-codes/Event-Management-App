@@ -12,9 +12,20 @@ const Login = () => {
 
   const validateForm = useCallback(() => {
     let errors = {};
-    if (!username.trim()) errors.username = "Username is required!";
-    if (!password) errors.password = "Password is required!";
-    else if (password.length < 6) errors.password = "Password must be at least 6 characters!";
+    // Validate Username
+    if (!username.trim()) {
+      errors.username = "Please enter your username.";
+    } else if (username.length < 3) {
+      errors.username = "Username must be at least 3 characters long.";
+    }
+
+    // Validate Password
+    if (!password) {
+      errors.password = "Please enter your password.";
+    } else if (password.length < 6) {
+      errors.password = "Password must be at least 6 characters long.";
+    }
+
     setErrors(errors);
   }, [username, password]);
 
@@ -25,16 +36,15 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     validateForm();
-
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        const response = await axios.post("https://event-management-app-trmh.onrender.com/api/auth/login", { username, password });
+        const response = await axios.post("http://localhost:5000/api/auth/login", { username, password });
         localStorage.setItem("token", response.data.token);
         navigate("/dashboard");
       } catch (err) {
         console.error("Login failed:", err.response?.data?.error || "An error occurred");
-        setErrors({ general: "Invalid username or password!" });
+        setErrors({ general: "Invalid username or password. Please try again." });
       } finally {
         setIsSubmitting(false);
       }
@@ -43,12 +53,12 @@ const Login = () => {
 
   const handleGuestLogin = async () => {
     try {
-      const response = await axios.post("https://event-management-app-trmh.onrender.com/api/auth/guest-login");
+      const response = await axios.post("http://localhost:5000/api/auth/guest-login");
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (err) {
       console.error("Guest login failed:", err.response?.data?.error || "An error occurred");
-      setErrors({ general: "Guest login failed!" });
+      setErrors({ general: "Guest login failed. Please try again." });
     }
   };
 
@@ -58,29 +68,30 @@ const Login = () => {
         <h1 className="login-title">Login</h1>
         {errors.general && <p className="error-message">{errors.general}</p>}
         <form onSubmit={handleLogin} className="login-form">
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={`login-input ${errors.username ? "error" : ""}`}
-          />
-          {errors.username && <p className="error-message">{errors.username}</p>}
-
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={`login-input ${errors.password ? "error" : ""}`}
-          />
-          {errors.password && <p className="error-message">{errors.password}</p>}
-
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className={`login-input ${errors.username ? "input-error" : ""}`}
+            />
+            {errors.username && <p className="error-message">{errors.username}</p>}
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={`login-input ${errors.password ? "input-error" : ""}`}
+            />
+            {errors.password && <p className="error-message">{errors.password}</p>}
+          </div>
           <button type="submit" className="login-button" disabled={isSubmitting}>
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
         </form>
-
         <button onClick={handleGuestLogin} className="guest-login-button">
           Login as Guest
         </button>

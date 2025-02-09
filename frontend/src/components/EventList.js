@@ -22,8 +22,7 @@ const EventList = ({ events, title, onAttend, onLeave, onUpdate, onCancel, isPas
         </thead>
         <tbody>
           {safeEvents.map((event) => {
-            const isEventPast = new Date(event.date) <= new Date(); // Check if the event is in the past
-
+            const isEventPast = new Date(event.date) <= new Date();
             return (
               <tr key={event._id}>
                 <td>
@@ -53,7 +52,7 @@ const EventList = ({ events, title, onAttend, onLeave, onUpdate, onCancel, isPas
                       <>
                         <button onClick={() => onAttend(event._id)}>Attend</button>
                         <button onClick={() => onLeave(event._id)}>Leave</button>
-                        <button onClick={()=> onCancel(event._id)}>Cancel</button>
+                        <button onClick={() => onCancel(event._id)}>Cancel</button>
                       </>
                     )}
                 </td>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import io from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import EventList from "../components/EventList";
 import EventForm from "../components/EventForm";
@@ -18,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-      navigate("/login"); // Redirect to login if no token is found
+      navigate("/login");
     } else {
       const decodedToken = JSON.parse(atob(token.split(".")[1]));
       setUserId(decodedToken.userId);
@@ -26,132 +25,141 @@ const Dashboard = () => {
     }
   }, [navigate]);
 
-  // Memoize fetchEvents to avoid unnecessary re-renders
+  // Fetch events
   const fetchEvents = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You need to log in to view events.");
+      navigate("/login");
+      return;
+    }
     try {
-      const response = await axios.get("https://event-management-app-trmh.onrender.com/api/events", {
+      const response = await axios.get("http://localhost:5000/api/events", {
         params: filter,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setEvents(response.data);
     } catch (err) {
-      console.error("Failed to fetch events:", err.response?.data?.error || "Unknown error");
-      alert(`Failed to fetch events: ${err.response?.data?.error || "Unknown error"}`);
+      if (err.response?.status === 401) {
+        alert("Your session has expired. Please log in again.");
+        localStorage.removeItem("token"); // Clear the invalid token
+        navigate("/login"); // Redirect to login
+      } else {
+        console.error("Failed to fetch events:", err.response?.data?.error || "Unknown error");
+        alert(`Failed to fetch events: ${err.response?.data?.error || "Unknown error"}`);
+      }
     }
-  }, [filter]);
+  }, [filter, navigate]);
 
   useEffect(() => {
     fetchEvents();
   }, [fetchEvents]);
 
-  // Socket.IO connection
-  useEffect(() => {
-    const socket = io("https://event-management-app-trmh.onrender.com", {
-      transports: ["websocket"], // Force WebSocket transport
-    });
-
-    // Listen for new events
-    socket.on("newEvent", (newEvent) => {
-      setEvents((prevEvents) => {
-        const now = new Date();
-        const upcomingEvents = [...prevEvents.upcomingEvents];
-        const pastEvents = [...prevEvents.pastEvents];
-
-        if (new Date(newEvent.date) > now) {
-          upcomingEvents.push(newEvent);
-        } else {
-          pastEvents.push(newEvent);
-        }
-
-        return { upcomingEvents, pastEvents };
-      });
-    });
-
-    // Listen for event updates
-    socket.on("updateEvent", (updatedEvent) => {
-      setEvents((prevEvents) => {
-        const updatedEvents = prevEvents.upcomingEvents.map((event) =>
-          event._id === updatedEvent._id ? updatedEvent : event
-        );
-        return { ...prevEvents, upcomingEvents: updatedEvents };
-      });
-    });
-
-    // Listen for event cancellations
-    socket.on("cancelEvent", (cancelledEvent) => {
-      setEvents((prevEvents) => {
-        const updatedEvents = prevEvents.upcomingEvents.map((event) =>
-          event._id === cancelledEvent._id ? cancelledEvent : event
-        );
-        return { ...prevEvents, upcomingEvents: updatedEvents };
-      });
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
-
+  // Handle attending an event
   const handleAttendEvent = async (eventId) => {
     try {
-      await axios.post(`https://event-management-app-trmh.onrender.com/api/events/${eventId}/attend`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You need to log in to attend an event.");
+        navigate("/login");
+        return;
+      }
+      await axios.post(
+        `http://localhost:5000/api/events/${eventId}/attend`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       fetchEvents(); // Refresh events after attending
     } catch (err) {
-      console.error("Failed to attend event:", err.response?.data?.error || "Unknown error");
+      console.error("Failed to attend event:", err);
       alert(`Failed to attend event: ${err.response?.data?.error || "Unknown error"}`);
     }
   };
 
+  // Handle leaving an event
   const handleLeaveEvent = async (eventId) => {
     try {
-      await axios.post(`https://event-management-app-trmh.onrender.com/api/events/${eventId}/leave`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You need to log in to leave an event.");
+        navigate("/login");
+        return;
+      }
+      await axios.post(
+        `http://localhost:5000/api/events/${eventId}/leave`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       fetchEvents(); // Refresh events after leaving
     } catch (err) {
-      console.error("Failed to leave event:", err.response?.data?.error || "Unknown error");
+      console.error("Failed to leave event:", err);
       alert(`Failed to leave event: ${err.response?.data?.error || "Unknown error"}`);
     }
   };
 
+  // Handle updating an event
   const handleUpdateEvent = (event) => {
     setEditingEvent(event);
   };
 
-  const handleCancelEvent = async (eventId) => {
-    try {
-      await axios.post(`https://event-management-app-trmh.onrender.com/api/events/${eventId}/cancel`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      fetchEvents(); // Refresh events after cancellation
-    } catch (err) {
-      console.error("Failed to cancel event:", err.response?.data?.error || "Unknown error");
-      alert(`Failed to cancel event: ${err.response?.data?.error || "Unknown error"}`);
-    }
-  };
-
+  // Handle saving an updated event
   const handleSaveEvent = async (updatedEvent) => {
     try {
-      await axios.put(`https://event-management-app-trmh.onrender.com/api/events/${updatedEvent._id}`, updatedEvent, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You need to log in to update an event.");
+        navigate("/login");
+        return;
+      }
+      await axios.put(
+        `http://localhost:5000/api/events/${updatedEvent._id}`,
+        updatedEvent,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       fetchEvents(); // Refresh events after updating
       setEditingEvent(null); // Close the edit form
     } catch (err) {
-      console.error("Failed to update event:", err.response?.data?.error || "Unknown error");
+      console.error("Failed to update event:", err);
       alert(`Failed to update event: ${err.response?.data?.error || "Unknown error"}`);
+    }
+  };
+
+  // Handle canceling an event
+  const handleCancelEvent = async (eventId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You need to log in to cancel an event.");
+        navigate("/login");
+        return;
+      }
+      await axios.post(
+        `http://localhost:5000/api/events/${eventId}/cancel`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      fetchEvents(); // Refresh events after cancellation
+    } catch (err) {
+      console.error("Failed to cancel event:", err);
+      alert(`Failed to cancel event: ${err.response?.data?.error || "Unknown error"}`);
     }
   };
 
@@ -188,7 +196,7 @@ const Dashboard = () => {
               Search
             </button>
           </div>
-          <EventForm isGuest={isGuest} />
+          <EventForm isGuest={isGuest} onEventCreated={fetchEvents} />
           {editingEvent && (
             <div className="edit-event-form">
               <h2>Edit Event</h2>
@@ -257,7 +265,7 @@ const Dashboard = () => {
             onAttend={handleAttendEvent}
             onLeave={handleLeaveEvent}
             onUpdate={handleUpdateEvent}
-            onCancel={handleCancelEvent}
+            onCancel={handleCancelEvent} // Ensure this is passed
             isPast={false}
             userId={userId}
             isGuest={isGuest}
@@ -268,7 +276,7 @@ const Dashboard = () => {
             onAttend={handleAttendEvent}
             onLeave={handleLeaveEvent}
             onUpdate={handleUpdateEvent}
-            onCancel={handleCancelEvent}
+            onCancel={handleCancelEvent} // Ensure this is passed
             isPast={true}
             userId={userId}
             isGuest={isGuest}
