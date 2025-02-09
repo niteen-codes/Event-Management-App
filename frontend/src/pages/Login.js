@@ -53,7 +53,7 @@ const Login = () => {
 
   const handleGuestLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/guest-login");
+      const response = await axios.post("https://event-management-app-ccof.onrender.com/api/auth/guest-login");
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (err) {
