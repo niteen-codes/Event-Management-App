@@ -12,7 +12,7 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: "https://event-management-app-alpha.vercel.app/login", // Allow requests from this origin
+    origin: "https://event-management-app-nu.vercel.app/login", // Allow requests from this origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
     credentials: true, // Allow cookies and authentication headers
   })
@@ -35,7 +35,7 @@ const server = http.createServer(app);
 // Initialize Socket.IO
 const io = socketIo(server, {
   cors: {
-    origin: "https://event-management-app-alpha.vercel.app/login", // Allow requests from this origin
+    origin: "https://event-management-app-nu.vercel.app/login", // Allow requests from this origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
     credentials: true, // Allow cookies and authentication headers
   },
