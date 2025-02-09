@@ -1,3 +1,4 @@
+
 # Event Management Application
 
 ## Overview
@@ -37,6 +38,9 @@ The Event Management Application is a full-stack web application that allows use
 - **JSON Web Token (JWT)**: For user authentication and authorization.
 - **Socket.IO**: For real-time communication with the frontend.
 
+### Image Hosting:
+- **Cloudinary**: Cloudinary is used for hosting and managing event-related images. It provides a reliable, scalable, and easy-to-integrate solution for uploading and retrieving images. With Cloudinary, images are automatically optimized for fast loading, and developers can manage them via API calls. 
+
 ### Tools:
 - **Postman**: For testing API endpoints.
 - **VS Code**: For code editing and debugging.
@@ -50,7 +54,7 @@ The Event Management Application is a full-stack web application that allows use
 ### Steps to Run the Application:
 #### Clone the Repository:
 ```bash
-git clone https://github.com/your-username/event-management-app.git
+git clone https://github.com/niteen-codes/event-management-app.git
 cd event-management-app
 ```
 
@@ -88,7 +92,7 @@ npm start
 The frontend application will run on `http://localhost:3000`.
 
 #### Access the Application:
-Open your browser and go to `http://localhost:3000` to access the application.
+Open your browser and go to `` to access the application.
 
 ## API Endpoints
 ### Authentication:
@@ -150,5 +154,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Contact
 For any questions or feedback, feel free to reach out:
-- **Email**: your-email@example.com
-- **GitHub**: [your-username](https://github.com/your-username)
+- **Email**: niteenjha190@gmail.com
+- **GitHub**: [your-username](https://github.com/niteen-codes)
