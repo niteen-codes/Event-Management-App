@@ -38,7 +38,7 @@ const Register = () => {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        await axios.post("https://event-management-app-ccof.onrender.com/api/auth/register", { username, password });
+        await axios.post("https://event-management-app-3771.onrender.com/api/auth/register", { username, password });
         alert("Registration successful! Please log in.");
         navigate("/login");
       } catch (err) {

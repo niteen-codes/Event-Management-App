@@ -34,7 +34,7 @@ const Dashboard = () => {
       return;
     }
     try {
-      const response = await axios.get("https://event-management-app-ccof.onrender.com/api/events", {
+      const response = await axios.get("https://event-management-app-3771.onrender.com/api/events", {
         params: filter,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ const Dashboard = () => {
         return;
       }
       await axios.post(
-        `https://event-management-app-ccof.onrender.com/api/events/${eventId}/attend`,
+        `https://event-management-app-3771.onrender.com/api/events/${eventId}/attend`,
         null,
         {
           headers: {
@@ -92,7 +92,7 @@ const Dashboard = () => {
         return;
       }
       await axios.post(
-        `https://event-management-app-ccof.onrender.com/api/events/${eventId}/leave`,
+        `https://event-management-app-3771.onrender.com/api/events/${eventId}/leave`,
         null,
         {
           headers: {
@@ -122,7 +122,7 @@ const Dashboard = () => {
         return;
       }
       await axios.put(
-        `https://event-management-app-ccof.onrender.com/api/events/${updatedEvent._id}`,
+        `https://event-management-app-3771.onrender.com/api/events/${updatedEvent._id}`,
         updatedEvent,
         {
           headers: {
@@ -148,7 +148,7 @@ const Dashboard = () => {
         return;
       }
       await axios.post(
-        `https://event-management-app-ccof.onrender.com/api/events/${eventId}/cancel`,
+        `https://event-management-app-3771.onrender.com/api/events/${eventId}/cancel`,
         null,
         {
           headers: {
