@@ -39,7 +39,10 @@ const Login = () => {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        const response = await axios.post("https://event-management-app-3771.onrender.com/api/auth/login", { username, password });
+        const response = await axios.post(
+          "https://event-management-app-3771.onrender.com/api/auth/login", // Correct URL
+          { username, password }
+        );
         localStorage.setItem("token", response.data.token);
         navigate("/dashboard");
       } catch (err) {
@@ -53,7 +56,9 @@ const Login = () => {
 
   const handleGuestLogin = async () => {
     try {
-      const response = await axios.post("https://event-management-app-3771.onrender.com/api/auth/guest-login");
+      const response = await axios.post(
+        "https://event-management-app-3771.onrender.com/api/auth/guest-login" // Correct URL
+      );
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (err) {
