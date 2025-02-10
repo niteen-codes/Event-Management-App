@@ -39,7 +39,7 @@ const Login = () => {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        const response = await axios.post("http://localhost:5001/api/auth/login", { username, password });
+        const response = await axios.post("http://localhost:5000/api/auth/login", { username, password });
         localStorage.setItem("token", response.data.token);
         navigate("/dashboard");
       } catch (err) {
@@ -53,7 +53,7 @@ const Login = () => {
 
   const handleGuestLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:5001/api/auth/guest-login");
+      const response = await axios.post("http://localhost:5000/api/auth/guest-login");
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (err) {

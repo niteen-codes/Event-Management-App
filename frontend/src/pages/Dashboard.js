@@ -34,7 +34,7 @@ const Dashboard = () => {
       return;
     }
     try {
-      const response = await axios.get("http://localhost:5001/", {
+      const response = await axios.get("http://localhost:5000/api/events", {
         params: filter,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ const Dashboard = () => {
         return;
       }
       await axios.post(
-        `http://localhost:5001/api/events/${eventId}/attend`,
+        `http://localhost:5000/api/events/${eventId}/attend`,
         null,
         {
           headers: {
@@ -92,7 +92,7 @@ const Dashboard = () => {
         return;
       }
       await axios.post(
-        `http://localhost:5001/api/events/${eventId}/leave`,
+        `http://localhost:5000/api/events/${eventId}/leave`,
         null,
         {
           headers: {
@@ -122,7 +122,7 @@ const Dashboard = () => {
         return;
       }
       await axios.put(
-        `http://localhost:5001/api/events/${updatedEvent._id}`,
+        `http://localhost:5000/api/events/${updatedEvent._id}`,
         updatedEvent,
         {
           headers: {
@@ -148,7 +148,7 @@ const Dashboard = () => {
         return;
       }
       await axios.post(
-        `http://localhost:5001/api/events/${eventId}/cancel`,
+        `http://localhost:5000/api/events/${eventId}/cancel`,
         null,
         {
           headers: {

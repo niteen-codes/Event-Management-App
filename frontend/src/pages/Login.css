@@ -1,129 +1,107 @@
-/* General Login Form Styles */
+/* Ultra-Premium, Modern, and Aesthetic Login Form Styles */
+
+:root {
+  --primary-color: #1f1f2e;
+  --secondary-color: #a29bfe;
+  --accent-color: #6c5ce7;
+  --input-bg: rgba(255, 255, 255, 0.2);
+  --input-focus: rgba(255, 255, 255, 0.4);
+  --shadow: rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.15);
+}
+
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   animation: fadeIn 0.6s ease-in-out;
 }
 
 .login-box {
-  width: 350px;
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  background: var(--glass-bg);
+  padding: 50px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px var(--shadow);
+  backdrop-filter: blur(12px);
   text-align: center;
-  animation: slideIn 0.6s ease-in-out;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .login-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
+  font-size: 34px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 28px;
+  text-transform: uppercase;
 }
 
-/* Input Fields */
 .input-group {
-  margin-bottom: 15px;
-  position: relative;
+  margin-bottom: 25px;
+  text-align: left;
 }
 
 .login-input {
   width: 100%;
-  padding: 12px;
+  padding: 18px;
   border: none;
-  border-radius: 8px;
-  background: #f8f9fa;
-  font-size: 16px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
+  border-radius: 15px;
+  font-size: 18px;
+  background: var(--input-bg);
+  color: white;
+  transition: all 0.3s ease-in-out;
+  box-shadow: inset 0 0 12px var(--input-focus);
 }
 
 .login-input:focus {
+  border: 2px solid var(--secondary-color);
+  box-shadow: 0px 0px 20px var(--input-focus);
   outline: none;
-  border: 2px solid #007bff;
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+  transform: scale(1.05);
 }
 
-/* Error Styles */
 .input-error {
-  border: 2px solid red;
+  border: 2px solid #e74c3c !important;
 }
 
 .error-message {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-  animation: fadeIn 0.5s;
+  color: #e74c3c;
+  font-size: 16px;
+  margin-top: 6px;
 }
 
-/* Buttons */
 .login-button, .guest-login-button {
   width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  padding: 18px;
+  background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
   color: white;
+  font-size: 22px;
   border: none;
-  font-size: 18px;
-  font-weight: bold;
-  border-radius: 8px;
+  border-radius: 15px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 15px;
 }
 
 .login-button:hover, .guest-login-button:hover {
-  background: linear-gradient(135deg, #0056b3, #004494);
-  box-shadow: 0 4px 10px rgba(0, 91, 187, 0.4);
-  transform: translateY(-2px);
+  background: linear-gradient(45deg, #4834d4, #be2edd);
+  box-shadow: 0 0 30px rgba(189, 195, 199, 0.6);
+  transform: scale(1.08);
 }
 
-.login-button:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .login-box {
     width: 90%;
-    padding: 15px;
-  }
-  .login-input {
-    font-size: 14px;
-    padding: 10px;
-  }
-  .login-button, .guest-login-button {
-    font-size: 16px;
-    padding: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .login-title {
-    font-size: 20px;
-  }
-  .login-button, .guest-login-button {
-    font-size: 14px;
-    padding: 8px;
-  }
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    padding: 35px;
   }
 }

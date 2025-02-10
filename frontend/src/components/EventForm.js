@@ -83,7 +83,7 @@ const EventForm = ({ isGuest, onEventCreated }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:5001/api/events",
+        "http://localhost:5000/api/events",
         {
           ...formData,
           imageUrl,
