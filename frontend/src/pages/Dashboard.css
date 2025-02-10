@@ -1,0 +1,357 @@
+/* General Styling */
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  padding: 20px;
+}
+
+.dashboard-content {
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px); /* Glass effect */
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard-content:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  backdrop-filter: blur(15px);
+}
+
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #dde0e5;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Filter Section */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.filter-input,
+.search-button {
+  padding: 12px;
+  border: 2px solid #2a5298;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.filter-input {
+  width: 200px;
+}
+
+.filter-input:focus,
+.search-button:focus {
+  outline: none;
+  border-color: #1e3c72;
+}
+
+.search-button {
+  background: #2a5298;
+  color: white;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background: #1e3c72;
+  transform: translateY(-2px);
+}
+
+.search-button:active {
+  transform: translateY(1px);
+}
+
+/* Event Form */
+.form-input,
+.form-textarea,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 2px solid #2a5298;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+select:focus {
+  border-color: #1e3c72;
+  outline: none;
+}
+
+.submit-button,
+.cancel-button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.submit-button {
+  background: #4caf50;
+  color: white;
+}
+
+.submit-button:hover {
+  background: #388e3c;
+}
+
+.submit-button:active {
+  transform: translateY(1px);
+}
+
+.cancel-button {
+  background: #d32f2f;
+  color: white;
+}
+
+.cancel-button:hover {
+  background: #b71c1c;
+}
+
+.cancel-button:active {
+  transform: translateY(1px);
+}
+
+/* Event List */
+.event-list {
+  margin-top: 30px;
+}
+
+.event-card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.event-card:hover {
+  transform: scale(1.03);
+}
+
+.event-card h3 {
+  font-size: 1.5rem;
+  color: #2a5298;
+  margin-bottom: 10px;
+}
+
+.event-card p {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Buttons inside event list */
+.attend-button,
+.leave-button,
+.update-button,
+.cancel-event-button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 6px;
+}
+
+.attend-button {
+  background: #ff9800;
+  color: white;
+}
+
+.attend-button:hover {
+  background: #e68900;
+}
+
+.leave-button {
+  background: #607d8b;
+  color: white;
+}
+
+.leave-button:hover {
+  background: #546e7a;
+}
+
+.update-button {
+  background: #1976d2;
+  color: white;
+}
+
+.update-button:hover {
+  background: #1565c0;
+}
+
+.cancel-event-button {
+  background: #d32f2f;
+  color: white;
+}
+
+.cancel-event-button:hover {
+  background: #b71c1c;
+}
+
+.attend-button:active,
+.leave-button:active,
+.update-button:active,
+.cancel-event-button:active {
+  transform: scale(0.95);
+}
+
+/* Responsive Design */
+
+/* Mobile First - For screens up to 600px */
+@media (max-width: 600px) {
+  .dashboard-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-input,
+  .search-button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .dashboard-content {
+    padding: 15px;
+  }
+
+  .form-input,
+  .form-textarea,
+  select {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submit-button,
+  .cancel-button {
+    padding: 14px;
+    font-size: 18px;
+  }
+
+  .event-card {
+    padding: 15px;
+  }
+}
+
+/* For tablets and small desktops - For screens from 600px to 992px */
+@media (max-width: 992px) {
+  .dashboard-title {
+    font-size: 1.75rem;
+  }
+
+  .filter-input,
+  .search-button {
+    width: 250px;
+  }
+
+  .dashboard-content {
+    padding: 20px;
+  }
+
+  .submit-button,
+  .cancel-button {
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+/* For large desktops and wide screens */
+@media (min-width: 1200px) {
+  .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .filter-input,
+  .search-button {
+    width: 250px;
+  }
+
+  .dashboard-content {
+    padding: 30px;
+  }
+}
+
+/* For very large screens (e.g., 4K or ultra-wide monitors) */
+@media (min-width: 1800px) {
+  .dashboard-container {
+    padding: 30px;
+  }
+
+  .dashboard-content {
+    max-width: 1600px;
+  }
+
+  .filter-container {
+    gap: 20px;
+  }
+
+  .filter-input,
+  .search-button {
+    width: 300px;
+  }
+}
+
+/* Date Input Styling */
+.date-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #2a5298;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+/* Date Input Focus */
+.date-input:focus {
+  outline: none;
+  border-color: #1e3c72;
+  background: #f1f8ff;
+}
+
+/* Date Input Placeholder */
+.date-input::placeholder {
+  color: #777;
+  font-size: 14px;
+}
+
+/* Responsive Date Input for Smaller Screens */
+@media (max-width: 600px) {
+  .date-input {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+

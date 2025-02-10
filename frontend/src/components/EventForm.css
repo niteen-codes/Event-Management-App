@@ -1,0 +1,100 @@
+/* EventForm.css */
+.event-form {
+  max-width: 600px;
+  margin: 80px auto 20px; /* Adjusted for navbar */
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: calc(100vh - 100px); /* Scrollable if content exceeds viewport */
+}
+
+.event-form-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  background: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: #007bff;
+  outline: none;
+  background: #fff;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.input-error {
+  border-color: #ff4d4d;
+}
+
+.error-message {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056b3, #007bff);
+}
+
+.guest-message {
+  text-align: center;
+  color: #ff4d4d;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .event-form {
+    margin-top: 60px;
+    padding: 20px;
+  }
+
+  .event-form-title {
+    font-size: 24px;
+  }
+}
