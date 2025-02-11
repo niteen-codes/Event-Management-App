@@ -171,9 +171,8 @@ const EventForm = ({ isGuest, onEventCreated }) => {
         </select>
         {errors.category && <p className="error-message">{errors.category}</p>}
       </div>
-      import { FaPaperclip } from "react-icons/fa";
 
-<div className="form-group">
+      <div className="form-group">
   <label className="file-input-container">
     <FaPaperclip className="clip-icon" />
     <span className="file-label">Attach File</span>
