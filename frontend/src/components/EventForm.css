@@ -91,3 +91,47 @@ p{
   text-align: center;
   color: #ff4d4d;
 }
+
+/* EventForm.css */
+
+.file-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 15px;
+  width: 100%;
+  max-width: 350px;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+  background-color: #f9f9f9;
+}
+
+.file-input-container:hover {
+  border-color: #007bff;
+}
+
+.clip-icon {
+  font-size: 20px;
+  color: #555;
+  margin-right: 10px;
+}
+
+.file-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-name {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  font-weight: 500;
+}
+

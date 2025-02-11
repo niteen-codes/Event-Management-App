@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./EventForm.css";
+import { FaPaperclip } from "react-icons/fa";
 
 const EventForm = ({ isGuest, onEventCreated }) => {
   const [formData, setFormData] = useState({
@@ -170,9 +171,17 @@ const EventForm = ({ isGuest, onEventCreated }) => {
         </select>
         {errors.category && <p className="error-message">{errors.category}</p>}
       </div>
-      <div className="form-group">
-        <input type="file" name="image" onChange={handleFileChange} accept="image/*" />
-      </div>
+      import { FaPaperclip } from "react-icons/fa";
+
+<div className="form-group">
+  <label className="file-input-container">
+    <FaPaperclip className="clip-icon" />
+    <span className="file-label">Attach File</span>
+    <input type="file" name="image" onChange={handleFileChange} accept="image/*" className="file-input" />
+  </label>
+  {formData.image && <p className="file-name">Selected: {formData.image.name}</p>}
+</div>
+
       <button type="submit" className="submit-button" disabled={loading}>
         {loading ? "Creating..." : "Create Event"}
       </button>
