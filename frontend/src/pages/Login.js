@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
@@ -39,10 +39,7 @@ const Login = () => {
     if (Object.keys(errors).length === 0) {
       setIsSubmitting(true);
       try {
-        const response = await axios.post(
-          "https://event-management-app-3771.onrender.com/api/auth/login", // Correct URL
-          { username, password }
-        );
+        const response = await axios.post("http://localhost:5000/api/auth/login", { username, password });
         localStorage.setItem("token", response.data.token);
         navigate("/dashboard");
       } catch (err) {
@@ -56,9 +53,7 @@ const Login = () => {
 
   const handleGuestLogin = async () => {
     try {
-      const response = await axios.post(
-        "https://event-management-app-3771.onrender.com/api/auth/guest-login" // Correct URL
-      );
+      const response = await axios.post("http://localhost:5000/api/auth/guest-login");
       localStorage.setItem("token", response.data.token);
       navigate("/dashboard");
     } catch (err) {
@@ -96,6 +91,9 @@ const Login = () => {
           <button type="submit" className="login-button" disabled={isSubmitting}>
             {isSubmitting ? "Logging in..." : "Login"}
           </button>
+          <p className="register-text">
+            Don't have an account? <Link to="/register">Register here</Link>
+          </p>
         </form>
         <button onClick={handleGuestLogin} className="guest-login-button">
           Login as Guest
